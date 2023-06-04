@@ -9,6 +9,7 @@ public:
 	virtual void showInfo() = 0;
 	virtual string getDeptName() = 0;
 	//这些是属性
+	//这里的成员属性应该可以设置为保护权限
 	string m_name;
 	int m_I_D;
 	int m_DeptId;//据我猜测这应该是后面查找才需要他的编号。
@@ -25,8 +26,8 @@ public:
 		this->m_DeptId = m_DeptId;
 	}
 public:
-	void showInfo();
-	string getDeptName();
+	void showInfo();//显示员工信息
+	string getDeptName();//返回员工职位
 };
 
 class manager: public Worker//经理

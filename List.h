@@ -15,8 +15,8 @@ public:
 	~List();
 public:
 	List_Node* creat_List();
-	void treaverse_List();
-	bool is_empty();
+	void treaverse_List()const;
+	bool is_empty()const;
 	void delete_Node();
 	int List_length();
 	void sort();

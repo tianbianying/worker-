@@ -1,6 +1,6 @@
 # include"List.h"
 
-List::List()
+List::List()//构造函数的调用时机是当对象创建的时候会自主调用一次。
 {
 	pHead = pTail = new List_Node[1];
 	if (pHead == NULL)
@@ -44,7 +44,7 @@ List_Node* List::creat_List()
 		switch (m_DeptId)
 		{
 		case 1:
-			pNew->data = new staff(name, Id, m_DeptId);
+			pNew->data = new staff(name, Id, m_DeptId);//父类存储子类地址，或者说父类指向子类
 			break;
 		case 2:
 			pNew->data = new manager(name, Id, m_DeptId);
@@ -53,7 +53,6 @@ List_Node* List::creat_List()
 			pNew->data = new boos(name, Id, m_DeptId);
 			break;
 		default:
-
 			break;
 		}
 		pTail->pNext = pNew;
@@ -63,11 +62,11 @@ List_Node* List::creat_List()
 	cout << "保存成功" << endl;
 	system("pause");
 	system("cls");
-	return pHead;
+	return pHead;//在这里其实可以不返回头结点，因为所有函数共处一个类中所以都可以进行调用。
 }
-void List::treaverse_List()
-{
-	if (is_empty())
+void List::treaverse_List()const//这里const的作用是将此函数变成只读状态，this指针本身是List* const 类型本身不能改变，但指向的值可以改变在函数后加从const会让该函数内部
+{								//的this指针变为const List* const类型的只允许读取不允许更改。除非变量前缀加上mutable，这样即使是在这样的函数内部也可以修改
+	if (is_empty())				//常对象只能调用常函数。因为普通函数有可能会侧面修改类内成员。
 	{
 		cout << "系统为空" << endl;
 		system("pause");
@@ -83,7 +82,7 @@ void List::treaverse_List()
 	system("pause");
 	system("cls");
 }
-bool List::is_empty()
+bool List::is_empty()const
 {
 	if (pHead->pNext == NULL)
 	{
@@ -138,7 +137,7 @@ void List::delete_Node()
 void List::sort()
 {
 	int i, j, len;
-	len = List_length();//分装过后最显著优点是不需要重复使用形参。
+	len = List_length();//分装过后的显著优点是不需要重复使用形参。
 	List_Node* p = pHead;
 	List_Node* q;
 	Worker* temp;
@@ -199,7 +198,7 @@ void List::revise()
 	/*;
 	p->data->m_name = name;
 	p->data->m_DeptId = m_DeptId;
-	cout << "修改成功" << endl;*/
+	cout << "修改成功" << endl;*///这里是之前我第一次进行修改，发现有问题具体问题不知。
 	system("pause");
 	system("cls");
 	return;
@@ -259,7 +258,7 @@ void List::empty()
 	system("cls");
 }
 
-List::~List()
+List::~List()//构析函数的调用时机是当对象销毁时，会自主调用一次。一般来说这个时机是当整个函数完结时。
 {
 	List_Node* p = pHead->pNext;
 	List_Node* q;
